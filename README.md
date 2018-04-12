@@ -1,7 +1,8 @@
-Note!
-This repository is no longer maintained! Changes to this repository will not result in the build of a new image on DockerHub.
-I suggest anyone interested in further developing this Docker image to fork this repository and create your own Docker image (on DockerHub).
-Thanks for your interest!
+This repository is a fork of "krizsan/elastalert-docker" repository.
+
+The major changes are:
+  * Set a fixed elastalert tagged version (before it was setted master branch version). At this moment it's setted a custom elastalert version because the last available version (v0.1.29) has a breaking bug.
+
 
 # Elastalert Docker Image
 

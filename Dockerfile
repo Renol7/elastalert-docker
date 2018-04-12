@@ -13,11 +13,10 @@
 # limitations under the License.
 
 # Elastalert Docker image running on Alpine Linux.
-# Build image with: docker build -t ivankrizsan/elastalert:latest .
 
 FROM alpine
 
-LABEL maintainer="Ivan Krizsan, https://github.com/krizsan"
+LABEL maintainer="Renol7, https://github.com/Renol7"
 
 # Set this environment variable to True to set timezone on container start.
 ENV SET_CONTAINER_TIMEZONE False
@@ -53,12 +52,10 @@ WORKDIR /opt
 # Install software required for Elastalert and NTP for time synchronization.
 RUN apk update && \
     apk upgrade && \
-    apk add ca-certificates openssl-dev openssl libffi-dev python2 python2-dev py2-pip py2-yaml gcc musl-dev tzdata openntpd wget && \
-# Download and unpack Elastalert.
-    wget -O elastalert.zip "${ELASTALERT_URL}" && \
-    unzip elastalert.zip && \
-    rm elastalert.zip && \
-    mv e* "${ELASTALERT_HOME}"
+    apk add ca-certificates openssl-dev openssl libffi-dev python2 python2-dev py2-pip py2-yaml gcc musl-dev tzdata openntpd wget
+
+# Copy custom Elastalert version (temporal fix while official repo doesn't release a new one).
+COPY elastalert-0.1.29-custom/ "${ELASTALERT_HOME}"
 
 WORKDIR "${ELASTALERT_HOME}"
 
